@@ -3,7 +3,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
-      <title>Atom-Admin</title>
+      <title>RELATORIO</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <!-- Bootstrap -->
       <link href="bs3/css/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +19,8 @@
       <link href="plugins/data-tables/DT_bootstrap.css" rel="stylesheet">
       <link href="plugins/advanced-datatable/css/demo_table.css" rel="stylesheet">
       <link href="plugins/advanced-datatable/css/demo_page.css" rel="stylesheet">
+      <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet">
+
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
@@ -236,7 +238,15 @@
       <script src="js/smooth-sliding-menu.js"></script> 
       <script type="text/javascript" src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script> 
       <!--   <script src="plugins/data-tables/DT_bootstrap.js"></script> -->
+
       <script src="plugins/data-tables/jquery.dataTables.js"></script> 
+     	  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+	  <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+	  <script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+	  <script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+	  <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+
+      
       <!--  <script src="plugins/data-tables/dynamic_table_init.js"></script>-->
       <!-- jQuery Notification - Noty -->
       <script src="js/jquery.noty.js"></script> <!-- jQuery Notify -->
@@ -279,9 +289,14 @@
                checkout.hide();
            }).data('datepicker');
          
-         
+ 			        
          $('#hidden-table-info').dataTable( {
-         "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+          dom: 'lfrtBip',
+   			 buttons: [
+     		 'copy', 'csv', 'excel', 'pdf'
+    		],
+
+        	 "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
          console.log(aaData);
          var TotalMarks = 0;
          for ( var i=0 ; i<aaData.length ; i++ )
@@ -294,10 +309,11 @@
          nCells[1].innerHTML = 'R$ '+ TotalMarks ;
          
          }
-         });
          
          });
-         
+
+
+         });
          
          noty({text: ' ERRO! Produto não encontrado.', layout: 'bottom', type: 'warning', timeout: 2000});
          noty({text: 'Aguarde...', layout: 'bottom', type: 'success', timeout: 1000});
